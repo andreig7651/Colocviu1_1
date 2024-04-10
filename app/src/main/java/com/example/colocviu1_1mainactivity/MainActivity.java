@@ -2,7 +2,9 @@ package com.example.colocviu1_1mainactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
                 numberOfPoints++;
                 inputHistory.setText(result);
             }
+
+            if (view.getId() == R.id.navigateToSecondActivity) {
+                Intent intent = new Intent(getApplicationContext(), SecondaryActivity.class);
+                intent.putExtra(Constants.CURRENT_INSTRUCTIONS, result);
+                startActivityForResult(intent, Constants.SECONDARY_ACTIVITY_REQUEST_CODE);
+            }
         }
     }
 
@@ -65,9 +73,8 @@ public class MainActivity extends AppCompatActivity {
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState.containsKey(Constants.INPUT_HISTORY)) {
             inputHistory.setText(savedInstanceState.getString(Constants.INPUT_HISTORY));
-        } else {
-            inputHistory.setText("");
         }
+
         if (savedInstanceState.containsKey(Constants.NUMBER_OF_CLICKS)) {
             Toast.makeText(this, "Button clicked " +
                     savedInstanceState.getString(Constants.NUMBER_OF_CLICKS) +
@@ -95,8 +102,17 @@ public class MainActivity extends AppCompatActivity {
 
         inputHistory = findViewById(R.id.inputHistory);
 
+
         navigateToSecondActivity = findViewById(R.id.navigateToSecondActivity);
         navigateToSecondActivity.setOnClickListener(buttonClickListener);
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == Constants.SECONDARY_ACTIVITY_REQUEST_CODE) {
+            Toast.makeText(this, "The activity returned with result " + resultCode, Toast.LENGTH_LONG).show();
+        }
     }
 }

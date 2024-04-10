@@ -6,4 +6,6 @@
     <string name="south">SOUTH</string>
     <string name="inputHistory" />
     <string name="navigateToSecondActivity">NAVIGATE TO SECOND ACTIVITY</string>
+    <string name="register">Register</string>
+    <string name="cancel">Cancel</string>
 </resources>
