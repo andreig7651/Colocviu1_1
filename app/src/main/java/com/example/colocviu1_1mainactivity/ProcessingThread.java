@@ -34,6 +34,7 @@ public class ProcessingThread extends Thread {
     }
 
     private void sendMessage() {
+        Log.d("[THREAD]", currentInstructions);
         Intent intent = new Intent();
         intent.setAction("read instructions");
         intent.putExtra(Constants.BROADCAST_RECEIVER_EXTRA,

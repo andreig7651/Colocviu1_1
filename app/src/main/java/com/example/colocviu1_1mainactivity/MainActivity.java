@@ -64,13 +64,12 @@ public class MainActivity extends AppCompatActivity {
                 inputHistory.setText(inputHistory.getText() + "West, ");
             }
 
-//            if (Constants.NR_OF_CLICKS > 4 && serviceStatus == 0) {
-//                Log.d("[HERE]", "start");
-//                Intent intent = new Intent(getApplicationContext(), Colocviu1_1Service.class);
-//                intent.putExtra(Constants.CURRENT_INSTRUCTIONS, inputHistory.getText());
-//                getApplicationContext().startService(intent);
-//                serviceStatus = 1;
-//            }
+            if (Constants.NR_OF_CLICKS >= 4 && serviceStatus == 0) {
+                Intent intent = new Intent(getApplicationContext(), Colocviu1_1Service.class);
+                intent.putExtra(Constants.CURRENT_INSTRUCTIONS, inputHistory.getText().toString());
+                getApplicationContext().startService(intent);
+                serviceStatus = 1;
+            }
 
             if (view.getId() == R.id.navigateToSecondActivity) {
                 Intent intent = new Intent(getApplicationContext(), SecondaryActivity.class);
